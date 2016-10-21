@@ -1,4 +1,6 @@
 #include <iostream>
 int main(){
-	std::cout << "And his name is John Cena!!!!";
+	using namespace std;
+	cout << "And his name is John Cena!!!! ";
+	cout << "Dicks out for Harambe";
 }
