@@ -1,43 +1,63 @@
-public class Plist{
-	private Node head;
-	private Node tail;
-	private int size;
+public class LinkedList<T>{
 	private class Node<T>{
 		private T data;
 		private Node prev;
 		private Node next;
-		public Node(T data, Node prev, Node next){
-			this.data = data;
+		public Node(Node prev, T data, Node next){
 			this.prev = prev;
+			this.data = data;
 			this.next = next;
+		}
+		public Node getPrev(){
+			return prev;
+		}
+		public Node getNext(){
+			return next;
 		}
 		public T data(){
 			return data;
 		}
-		public 
-	}
-	private class Position<T>{
-		private PList plist;
-		private Node node;
-		public Position(PList plist, Node node){
-			this.plist = plist;
-			this.node = node;
+		public void setData(T data){
+			this.data = data;
 		}
-		public T data(){
-			return node.data();
+		public void setPrev(Node prev){
+			this.prev = prev;
+		}
+		public void setNext(Node next){
+			this.next = next;
 		}
 	}
-	private Position make_position(Node node){
-		if(node == head or node == tail){
-			return null;
+	private Node head;
+	private Node tail;
+	private int size;
+	public LinkedList(){
+		head = new Node(null, null, null);
+		tail = head;
+	}
+	public int size(){
+		return size;
+	}
+	public T data(int p){
+		if(p >= size){
+			throw new IndexOutOfBoundsException();
 		}
 		else{
-			p = new Position(this, node);
-			return p;
+			Node current;
+			if(p > size / 2){
+				current = tail;
+				for(i = size; i != p; i--){
+					current = current.getPrev();
+				}
+				return current;
+			}
+			else{
+				current = head;
+				for(i = 0; i != p; i++){
+					current = current.getNext();
+				}
+				return current;
+			}
 		}
 	}
-	public PList(){
-		head = new Node(null, null, null);
-
-	}
+	public void 
 }
