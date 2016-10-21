@@ -8,10 +8,18 @@ class PList:
             self._data=data
             self._prev=prev
             self._next=next
+    class Validity:
+        def __init__(self):
+            self._valid = True
+        def changeValid(self):
+            self._valid = False
+        def getValid(self):
+            return self._valid
     class Position:
         def __init__(self,plist,node):
             self._plist=plist
             self._node=node
+            self._valid = plist._valid
         def data(self):
             return self._node._data
         def __eq__(self,other):
@@ -23,7 +31,7 @@ class PList:
             raise TypeError("p must be proper Position type")
         if p._plist is not self:
             raise ValueError('p does not belong to this PList')
-        if p._node._next is None:
+        if p._node._next is None or not p._valid.getValid():
             raise ValueError('p is no longer valid')
         return p._node
     def _make_position(self,node):
@@ -34,6 +42,7 @@ class PList:
     def __init__(self):
         self._head=self._Node(None,None,None)
         self._head._next=self._tail=self._Node(None,self._head,None)
+        self._valid = self.Validity()
     def __len__(self):
         size = 0
         for x in self:
@@ -91,10 +100,17 @@ class PList:
         while pos:
             yield pos.data()
             pos=self.before(pos)
+    def _invalidate_positions(self):
+        self._valid.changeValid()
+        self._valid = PList.Validity()
     def __iadd__(self, other):
-        self._tail._prev._next = other._head._next
         other._head._next._prev = self._tail._prev
-        self._tail = other._tail
+        other._tail._prev._next = self._tail
+        self._tail._prev._next = other._head._next
+        self._tail._prev = other._tail._prev
+        other._tail._prev = other._head
+        other._head._next = other._tail
+        other._invalidate_positions()
         return self
     def split_after(self, p):
         severed = PList()
@@ -104,6 +120,7 @@ class PList:
         p._node._next = self._Node(None, None, None)
         self._tail = p._node._next
         p._node._next._prev = p._node
+        self._invalidate_positions()
         return severed
     def split_before(self, p):
         severed = PList()
@@ -114,7 +131,10 @@ class PList:
         temp._next = self._Node(None, None, None)
         self._tail = temp._next
         temp._next._prev = temp
+        self._invalidate_positions()
         return severed
+
+
 
 
 
@@ -156,10 +176,10 @@ def checkList(taskno,testno,yours,correctforward):
 To enable the test code for each task, change the booleans below. When you are
 working on one task you may want to disable the others.
 """
-testTask1=False
-testTask2=False
+testTask1=True
+testTask2=True
 testTask3=True
-testTask4=False
+testTask4=True
 testTask5=False
 
 
