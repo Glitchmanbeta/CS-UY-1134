@@ -14,13 +14,32 @@ class Sorts:
 			a -= 1
 		return self._ary
 
+	def selectionSort(self):
+		a = 0
+		while a < len(self._ary):
+			min = self._ary[a]
+			index = a
+			for j in range(a, len(self._ary)):
+				if self._ary[j] < min:
+					min = self._ary[j]
+					index = j
+			self._ary[index] = self._ary[a]
+			self._ary[a] = min
+			a += 1
+		return self._ary
+
 	def toString(self):
 		return self._ary
 
 def main():
 	ary = [6, 5, 3, 1, 8, 7, 2, 4]
 	s = Sorts(ary)
+	print(s.toString())
 	s.bubbleSort()
+	print(s.toString())
+	ary = [6, 5, 3, 1, 8, 7, 2, 4]
+	s = Sorts(ary)
+	s.selectionSort()
 	print(s.toString())
 
 main()
