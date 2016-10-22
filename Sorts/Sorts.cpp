@@ -2,30 +2,20 @@
 #include <string>
 using namespace std;
 
-void bubbleSort(int ary[]){
-	int a = ary.length;
-	while(a > 0){
-		for(int j = 0; j < a - 1; j++){
-			if(ary[j] > ary[j + 1]){
-				int temp = ary[j];
-				ary[j] = ary[j + 1];
-				ary[j + 1] = temp;
-			}
-		}
-		a--;
+class Sorts{
+public:
+	Sorts(int* yra){
+		ary = yra;
 	}
-	return ary;
-}
+	int* Print(){
+		return ary;
+	}
+private:
+	int* ary;
+};
 
-string toString(){
-	string s = "[";
-	for(int i = 0; i < ary.length; i++){
-		if(i == ary.length - 1){
-			s += ary[i] + "]";
-		}
-		else{
-			s += ary[i] + ", ";
-		}
-	}
-	return s;
+int main(){
+	int ary[8] = {6, 5, 3, 1, 8, 7, 2, 4};
+	Sorts s(ary);
+	cout << s.Print();
 }
