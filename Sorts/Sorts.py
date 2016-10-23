@@ -1,5 +1,6 @@
 bubble = False
-selection = True
+selection = False
+insertion = True
 class Sorts:
 
 	def __init__(self, ary):
@@ -27,6 +28,18 @@ class Sorts:
 					index = j
 			self._ary[index] = self._ary[a]
 			self._ary[a] = min
+			a += 1
+		return self._ary
+
+	def insertionSort(self):
+		a = 0
+		while a < len(self._ary):
+			j = a
+			temp = self._ary[a]
+			while j > 0 and self._ary[j - 1] > temp:
+				self._ary[j] = self._ary[j - 1]
+				j -= 1
+			self._ary[j] = temp
 			a += 1
 		return self._ary
 
@@ -58,6 +71,10 @@ def main():
 		b.selectionSort()
 		a.selectionSort()
 		w.selectionSort()
+	if insertion:
+		b.insertionSort()
+		a.insertionSort()
+		w.insertionSort()
 	print("Best Case: " + b.toString())
 	print("Average Case " + a.toString())
 	print("Worst Case " + w.toString())

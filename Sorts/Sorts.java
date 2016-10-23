@@ -1,7 +1,8 @@
 public class Sorts{
 	private int[] ary;
 	public static boolean bubble = false;
-	public static boolean selection = true;
+	public static boolean selection = false;
+	public static boolean insertion = true;
 
 	public Sorts(int[] ary){
 		this.ary = ary;
@@ -40,6 +41,21 @@ public class Sorts{
 		return ary;
 	}
 
+	public int[] insertionSort(){
+		int a = 0;
+		while(a < ary.length){
+			int j = a;
+			int temp = ary[a];
+			while(j > 0 && ary[j - 1] > temp){
+				ary[j] = ary[j - 1];
+				j--;
+			}
+			ary[j] = temp;
+			a++;
+		}
+		return ary;
+	}
+
 	public String toString(){
 		String s = "[";
 		for(int i = 0; i < ary.length; i++){
@@ -73,6 +89,11 @@ public class Sorts{
 			b.selectionSort();
 			a.selectionSort();
 			w.selectionSort();
+		}
+		if(insertion){
+			b.insertionSort();
+			a.insertionSort();
+			w.insertionSort();
 		}
 		System.out.println("Best Case: " + b.toString());
 		System.out.println("Average Case: " + a.toString());

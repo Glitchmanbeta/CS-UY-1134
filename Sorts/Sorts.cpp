@@ -2,7 +2,8 @@
 #include <string>
 using namespace std;
 bool bubble = false;
-bool selection = true;
+bool selection = false;
+bool insertion = true;
 class Sorts{
 public:
 	Sorts(int* yra, int size){
@@ -38,6 +39,21 @@ public:
 			}
 			ary[index] = ary[a];
 			ary[a] = min;
+			a++;
+		}
+		return ary;
+	}
+
+	int* insertionSort(){
+		int a = 0;
+		while(a < length){
+			int j = a;
+			int temp = ary[a];
+			while(j > 0 && ary[j - 1] > temp){
+				ary[j] = ary[j - 1];
+				j--;
+			}
+			ary[j] = temp;
 			a++;
 		}
 		return ary;
@@ -80,6 +96,11 @@ int main(){
 		b.selectionSort();
 		a.selectionSort();
 		w.selectionSort();
+	}
+	if(insertion){
+		b.insertionSort();
+		a.insertionSort();
+		w.insertionSort();
 	}
 	cout << "Best Case: " + b.toString() + "\n";
 	cout << "Average Case: " + a.toString() + "\n";
