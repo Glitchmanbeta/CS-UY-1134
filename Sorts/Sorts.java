@@ -1,5 +1,7 @@
 public class Sorts{
-	int[] ary;
+	private int[] ary;
+	public static boolean bubble = false;
+	public static boolean selection = true;
 
 	public Sorts(int[] ary){
 		this.ary = ary;
@@ -52,9 +54,28 @@ public class Sorts{
 	}
 
 	public static void main(String[] args){
-		int[] ary = {6, 5, 3, 1, 8, 7, 2, 4};
-		Sorts s = new Sorts(ary);
-		s.selectionSort();
-		System.out.println(s.toString());
+		int[] ary1 = {1, 2, 3, 4, 5, 6, 7, 8};
+		int[] ary2 = {6, 5, 3, 1, 8, 7, 2, 4};
+		int[] ary3 = {8, 7, 6, 5, 4, 3, 2, 1};
+		Sorts b = new Sorts(ary1);
+		Sorts a = new Sorts(ary2);
+		Sorts w = new Sorts(ary3);
+		System.out.println("Java");
+		System.out.println("Best Case: " + b.toString());
+		System.out.println("Average Case: " + a.toString());
+		System.out.println("Worst Case: " + w.toString());
+		if(bubble){
+			b.bubbleSort();
+			a.bubbleSort();
+			w.bubbleSort();
+		}
+		if(selection){
+			b.selectionSort();
+			a.selectionSort();
+			w.selectionSort();
+		}
+		System.out.println("Best Case: " + b.toString());
+		System.out.println("Average Case: " + a.toString());
+		System.out.println("Worst Case: " + w.toString());
 	}
 }

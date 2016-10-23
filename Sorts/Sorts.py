@@ -1,3 +1,5 @@
+bubble = False
+selection = True
 class Sorts:
 
 	def __init__(self, ary):
@@ -29,17 +31,35 @@ class Sorts:
 		return self._ary
 
 	def toString(self):
-		return self._ary
+		s = "["
+		for i in range(len(self._ary)):
+			if i == len(self._ary) - 1:
+				s += str(self._ary[i]) + "]"
+			else:
+				s += str(self._ary[i]) + ", "
+		return s
 
 def main():
-	ary = [6, 5, 3, 1, 8, 7, 2, 4]
-	s = Sorts(ary)
-	print(s.toString())
-	s.bubbleSort()
-	print(s.toString())
-	ary = [6, 5, 3, 1, 8, 7, 2, 4]
-	s = Sorts(ary)
-	s.selectionSort()
-	print(s.toString())
+	ary1 = [1, 2, 3, 4, 5, 6, 7, 8]
+	ary2 = [6, 5, 3, 1, 8, 7, 2, 4]
+	ary3 = [8, 7, 6, 5, 4, 3, 2, 1]
+	b = Sorts(ary1)
+	a = Sorts(ary2)
+	w = Sorts(ary3)
+	print("Python")
+	print("Best Case: " + b.toString())
+	print("Average Case: " + a.toString())
+	print("Worst Case: " + w.toString())
+	if bubble:
+		b.bubbleSort()
+		a.bubbleSort()
+		w.bubbleSort()
+	if selection:
+		b.selectionSort()
+		a.selectionSort()
+		w.selectionSort()
+	print("Best Case: " + b.toString())
+	print("Average Case " + a.toString())
+	print("Worst Case " + w.toString())
 
 main()

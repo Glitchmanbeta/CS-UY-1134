@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+bool bubble = false;
+bool selection = true;
 class Sorts{
 public:
 	Sorts(int* yra, int size){
@@ -60,9 +61,27 @@ private:
 };
 
 int main(){
-	int ary[8] = {6, 5, 3, 1, 8, 7, 2, 4};
-	Sorts s(ary, 8);
-	cout << s.toString() + "\n";
-	s.selectionSort();
-	cout << s.toString() + "\n";
+	int ary1[] = {1, 2, 3, 4, 5, 6, 7, 8};
+	int ary2[] = {6, 5, 3, 1, 8, 7, 2, 4};
+	int ary3[] = {8, 7, 6, 5, 4, 3, 2, 1};
+	Sorts b(ary1, 8);
+	Sorts a(ary2, 8);
+	Sorts w(ary3, 8);
+	cout << "C++\n";
+	cout << "Best Case: " + b.toString() + "\n";
+	cout << "Average Case: " + a.toString() + "\n";
+	cout << "Worst Case: " + w.toString() + "\n";
+	if(bubble){
+		b.bubbleSort();
+		a.bubbleSort();
+		w.bubbleSort();
+	}
+	if(selection){
+		b.selectionSort();
+		a.selectionSort();
+		w.selectionSort();
+	}
+	cout << "Best Case: " + b.toString() + "\n";
+	cout << "Average Case: " + a.toString() + "\n";
+	cout << "Worst Case: " + w.toString() + "\n";
 }
