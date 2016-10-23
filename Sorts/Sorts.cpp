@@ -24,6 +24,24 @@ public:
 		return ary;
 	}
 
+	int* selectionSort(){
+		int a = 0;
+		while(a < length){
+			int min = ary[a];
+			int index = a;
+			for(int j = a; j < length; j++){
+				if(ary[j] < min){
+					min = ary[j];
+					index = j;
+				}
+			}
+			ary[index] = ary[a];
+			ary[a] = min;
+			a++;
+		}
+		return ary;
+	}
+
 	string toString(){
 		string s = "[";
 		for(int i = 0; i < length; i++){
@@ -44,6 +62,7 @@ private:
 int main(){
 	int ary[8] = {6, 5, 3, 1, 8, 7, 2, 4};
 	Sorts s(ary, 8);
-	s.bubbleSort();
-	cout << s.toString();
+	cout << s.toString() + "\n";
+	s.selectionSort();
+	cout << s.toString() + "\n";
 }

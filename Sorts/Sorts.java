@@ -20,6 +20,24 @@ public class Sorts{
 		return ary;
 	}
 
+	public int[] selectionSort(){
+		int a = 0;
+		while(a < ary.length){
+			int min = ary[a];
+			int index = a;
+			for(int j = a; j < ary.length; j++){
+				if(ary[j] < min){
+					min = ary[j];
+					index = j;
+				}
+			}
+			ary[index] = ary[a];
+			ary[a] = min;
+			a++;
+		}
+		return ary;
+	}
+
 	public String toString(){
 		String s = "[";
 		for(int i = 0; i < ary.length; i++){
@@ -36,7 +54,7 @@ public class Sorts{
 	public static void main(String[] args){
 		int[] ary = {6, 5, 3, 1, 8, 7, 2, 4};
 		Sorts s = new Sorts(ary);
-		s.bubbleSort();
+		s.selectionSort();
 		System.out.println(s.toString());
 	}
 }
