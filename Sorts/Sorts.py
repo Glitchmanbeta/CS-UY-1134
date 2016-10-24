@@ -69,6 +69,9 @@ class Sorts:
 					r -= 1
 				elif self._ary[l] < self._ary[pivot] and self._ary[r] < self._ary[pivot]:
 					l += 1
+				else:
+					l += 1
+					r -= 1
 			if self._ary[l] < self._ary[pivot]:
 				l += 1
 			temp = self._ary[l]
@@ -79,7 +82,7 @@ class Sorts:
 		return self._ary
 
 	def quickSort(self):
-		return self.quickSortHelp(len(self._ary) - 1, 0, len(self._ary) - 2)
+		return self.quickSortHelp(len(self._ary) // 2, 0, len(self._ary) - 1)
 
 	def toString(self):
 		s = "["
