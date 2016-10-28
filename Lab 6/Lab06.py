@@ -2,12 +2,20 @@
 #---------------The PList code I posted earlier---------
 
 class PList:
+    class Flip:
+        def __init__(self):
+            self._flipped = False
+        def flip(self):
+            self._flipped = not self._flipped
+        def getFlipped(self):
+            return self._flipped
     class _Node:
         __slots__='_data','_prev','_next'
         def __init__(self,data,prev,next):
             self._data=data
             self._prev=prev
             self._next=next
+            self._flipped = Flip()
     class Validity:
         def __init__(self):
             self._valid = True
@@ -20,12 +28,20 @@ class PList:
             self._plist=plist
             self._node=node
             self._valid = plist._valid
+            self._flipped = node._flipped
         def data(self):
             return self._node._data
         def __eq__(self,other):
             return type(other) is type(self) and other._node is self._node
         def __ne__(self,other):
             return not (self == other)
+    class Flip:
+        def __init__(self):
+            self._flipped = False
+        def flip(self):
+            self._flipped = not self._flipped
+        def getFlipped(self):
+            return self._flipped
     def _validate(self,p):
         if not isinstance(p,self.Position):
             raise TypeError("p must be proper Position type")
@@ -43,6 +59,12 @@ class PList:
         self._head=self._Node(None,None,None)
         self._head._next=self._tail=self._Node(None,self._head,None)
         self._valid = self.Validity()
+        self._flipped = self.Flip()
+    def flip(self):
+        temp = self._head
+        self._head = self._tail
+        self._tail = temp
+        self._flipped.flip()
     def __len__(self):
         size = 0
         for x in self:
@@ -176,11 +198,11 @@ def checkList(taskno,testno,yours,correctforward):
 To enable the test code for each task, change the booleans below. When you are
 working on one task you may want to disable the others.
 """
-testTask1=True
-testTask2=True
-testTask3=True
-testTask4=True
-testTask5=False
+testTask1=False
+testTask2=False
+testTask3=False
+testTask4=False
+testTask5=not False
 
 
 #------------------------TASK 1-----------------------
