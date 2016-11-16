@@ -1,10 +1,5 @@
 import random
 import sys
-bogo = False
-bubble = True
-selection = False
-insertion = False
-quick = False
 class Sorts:
 
 	def __init__(self, ary):
@@ -116,29 +111,40 @@ def main():
 	a = Sorts(ary2)
 	w = Sorts(ary3)
 	s = Sorts(ary0)
-	#print("Best Case: " + b.toString())
-	#print("Average Case: " + a.toString())
-	#print("Worst Case: " + w.toString())
-	print(sys.argv)
-	if bogo:
-		print(s.toString())
-		s.bogoSort()
-		print(s.toString())
-	if bubble:
-		print(s.toString())
-		s.bubbleSort()
-		print(s.toString())
-	if selection:
-		print(s.toString())
-		s.selectionSort()
-		print(s.toString())
-	if insertion:
-		print(s.toString())
-		s.insertionSort()
-		print(s.toString())
-	if quick:
-		print(s.toString())
-		s.bubbleSort()
-		print(s.toString())
+	try:
+		if sys.argv[1] == "BogoSort":
+			print("Python Bogo Sort")
+			print(s.toString())
+			s.bogoSort()
+			print(s.toString())
+			return
+		elif sys.argv[1] == "BubbleSort":
+			print("Python Bubble Sort")
+			print(s.toString())
+			s.bubbleSort()
+			print(s.toString())
+			return
+		elif sys.argv[1] == "SelectionSort":
+			print("Python Selection Sort")
+			print(s.toString())
+			s.selectionSort()
+			print(s.toString())
+			return
+		elif sys.argv[1] == "InsertionSort":
+			print("Python Insertion Sort")
+			print(s.toString())
+			s.insertionSort()
+			print(s.toString())
+			return
+		elif sys.argv[1] == "QuickSort":
+			print("Python Quick Sort")
+			print(s.toString())
+			s.bubbleSort()
+			print(s.toString())
+			return
+		else:
+			raise IndexError()
+	except IndexError:
+		print("Please indicate which sort you would like to run by typing 'python3 Sorts.py <X>Sort', where X is the name of the sort")
 
 main()
