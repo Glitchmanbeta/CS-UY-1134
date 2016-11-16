@@ -1,11 +1,25 @@
-bubble = False
+import random
+import sys
+bogo = False
+bubble = True
 selection = False
 insertion = False
-quick = True
+quick = False
 class Sorts:
 
 	def __init__(self, ary):
 		self._ary = ary
+
+	def bogoSort(self):
+		sorted = False
+		while not sorted:
+			i = 0
+			while self._ary[i] < self._ary[i + 1]:
+				if i == len(self._ary) - 2:
+					if self._ary[i] < self._ary[i + 1]:
+						return self._ary
+				i += 1
+			random.shuffle(self._ary)
 
 	def bubbleSort(self):
 		a = len(self._ary)
@@ -102,38 +116,29 @@ def main():
 	a = Sorts(ary2)
 	w = Sorts(ary3)
 	s = Sorts(ary0)
-	print("Python")
-	print(ary0)
-	print("Best Case: " + b.toString())
-	print("Average Case: " + a.toString())
-	print("Worst Case: " + w.toString())
+	#print("Best Case: " + b.toString())
+	#print("Average Case: " + a.toString())
+	#print("Worst Case: " + w.toString())
+	print(sys.argv)
+	if bogo:
+		print(s.toString())
+		s.bogoSort()
+		print(s.toString())
 	if bubble:
-		b.bubbleSort()
-		print("Best Case: " + b.toString())
-		a.bubbleSort()
-		print("Average Case " + a.toString())
-		w.bubbleSort()
-		print("Worst Case " + w.toString())
+		print(s.toString())
+		s.bubbleSort()
+		print(s.toString())
 	if selection:
-		b.selectionSort()
-		print("Best Case: " + b.toString())
-		a.selectionSort()
-		print("Average Case " + a.toString())
-		w.selectionSort()
-		print("Worst Case " + w.toString())
+		print(s.toString())
+		s.selectionSort()
+		print(s.toString())
 	if insertion:
-		b.insertionSort()
-		print("Best Case: " + b.toString())
-		a.insertionSort()
-		print("Average Case " + a.toString())
-		w.insertionSort()
-		print("Worst Case " + w.toString())
+		print(s.toString())
+		s.insertionSort()
+		print(s.toString())
 	if quick:
-		b.quickSort()
-		print("Best Case: " + b.toString())
-		a.quickSort()
-		print("Average Case " + a.toString())
-		w.quickSort()
-		print("Worst Case " + w.toString())
+		print(s.toString())
+		s.bubbleSort()
+		print(s.toString())
 
 main()
