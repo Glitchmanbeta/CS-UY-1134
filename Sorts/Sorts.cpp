@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 bool bubble = false;
 bool selection = false;
-bool insertion = true;
+bool insertion = false;
 class Sorts{
 public:
 	Sorts(int* yra, int size){
@@ -59,6 +60,57 @@ public:
 		return ary;
 	}
 
+	int* quickSort(){
+		return quickSortHelp(0, length - 1);
+	}
+
+	int* quickSortHelp(int left, int right){
+		if(left == right || left > right){
+			return ary;
+		}
+		else if(left + 1 == right){
+			if(ary[left] > ary[right]){
+				int temp = ary[left];
+				ary[left] = ary[right];
+				ary[right] = temp;
+				return ary;
+			}
+		}
+		else{
+			int pivot = right;
+			int l = left;
+			int r = right - 1;
+			while(l < r){
+				if(ary[l] <= ary[pivot] && ary[r] > ary[pivot]){
+					l++;
+					r--;
+				}
+				else if(ary[l] <= ary[pivot] && ary[r] <= ary[pivot]){
+					l++;
+				}
+				else if(ary[l] > ary[pivot] && ary[r] > ary[pivot]){
+					r--;
+				}
+				else if(ary[l] > ary[pivot] && ary[r] <= ary[pivot]){
+					int temp = ary[l];
+					ary[l] = ary[r];
+					ary[r] = temp;
+					l++;
+					r--;
+				}
+			}
+			if(ary[l] < ary[pivot]){
+				l++;
+			}
+			int temp = ary[l];
+			ary[l] = ary[pivot];
+			ary[pivot] = temp;
+			quickSortHelp(left, l - 1);
+			quickSortHelp(l + 1, right);
+		}
+		return ary;
+	}
+
 	string toString(){
 		string s = "[";
 		for(int i = 0; i < length; i++){
@@ -76,33 +128,43 @@ private:
 	int length;
 };
 
-int main(){
-	int ary1[] = {1, 2, 3, 4, 5, 6, 7, 8};
-	int ary2[] = {6, 5, 3, 1, 8, 7, 2, 4};
-	int ary3[] = {8, 7, 6, 5, 4, 3, 2, 1};
-	Sorts b(ary1, 8);
-	Sorts a(ary2, 8);
-	Sorts w(ary3, 8);
-	cout << "C++\n";
-	cout << "Best Case: " + b.toString() + "\n";
-	cout << "Average Case: " + a.toString() + "\n";
-	cout << "Worst Case: " + w.toString() + "\n";
-	if(bubble){
-		b.bubbleSort();
-		a.bubbleSort();
-		w.bubbleSort();
+int main(int argc, char *argv[]){
+	int ary0[] = {6, 5, 3, 1, 8, 7, 2, 4};
+	Sorts s(ary0, 8);
+	stringstream ss;
+	string str;
+	ss << argv[1];
+	ss >> str;
+	try{
+		if(str.compare("BubbleSort") == 0){
+			cout << "C++ Bubble Sort\n";
+			cout << s.toString() + "\n";
+			s.bubbleSort();
+			cout << s.toString() + "\n";
+		}
+		else if(str.compare("SelectionSort") == 0){
+			cout << "C++ Selection Sort\n";
+			cout << s.toString() + "\n";
+			s.selectionSort();
+			cout << s.toString() + "\n";
+		}
+		else if(str.compare("InsertionSort") == 0){
+			cout << "C++ Insertion Sort\n";
+			cout << s.toString() + "\n";
+			s.insertionSort();
+			cout << s.toString() + "\n";
+		}
+		else if(str.compare("QuickSort") == 0){
+			cout << "C++ Quick Sort\n";
+			cout << s.toString() + "\n";
+			s.quickSort();
+			cout << s.toString() + "\n";
+		}
+		else{
+			throw 69;
+		}
 	}
-	if(selection){
-		b.selectionSort();
-		a.selectionSort();
-		w.selectionSort();
+	catch(int e){
+		cout << "Please indicate which sort you would like to run by typing './Sorts <X>Sort', where X is the name of the sort\n";
 	}
-	if(insertion){
-		b.insertionSort();
-		a.insertionSort();
-		w.insertionSort();
-	}
-	cout << "Best Case: " + b.toString() + "\n";
-	cout << "Average Case: " + a.toString() + "\n";
-	cout << "Worst Case: " + w.toString() + "\n";
 }
