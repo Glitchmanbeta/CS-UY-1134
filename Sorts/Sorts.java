@@ -104,6 +104,24 @@ public class Sorts{
 		return ary;
 	}
 
+	public int[] mergeSort(){
+		if(ary.length <= 1){
+			return ary
+		}
+		else{
+			ary = mergeSortHelp(ary)
+		}
+	}
+
+	private int[] mergeSortHelp(int[] ary){
+		if(ary.length <= 1){
+			return ary
+		}
+		else{
+			int[] ary = int[8]
+		}
+	}
+
 	public String toString(){
 		String s = "[";
 		for(int i = 0; i < ary.length; i++){

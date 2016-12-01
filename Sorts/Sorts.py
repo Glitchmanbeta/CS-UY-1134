@@ -1,5 +1,12 @@
 import random
 import sys
+class Heap:
+
+	def __init__(self):
+		_A = []
+
+	def add(self, i):
+		_A.append
 class Sorts:
 
 	def __init__(self, ary):
@@ -93,6 +100,54 @@ class Sorts:
 			self._quickSortHelp(left, l - 1)
 			self._quickSortHelp(l + 1, right)
 
+	def mergeSort(self):
+		if len(self._ary) == 0 or len(self._ary) == 1:
+			return self._ary
+		else:
+			self._ary = self._mergeSortHelp(self._ary)
+
+	def _mergeSortHelp(self, ary):
+		if len(ary) <= 1:
+			return ary
+		else:
+			ary1 = []
+			ary2 = []
+			for i in range(len(ary)):
+				if i < len(ary) // 2:
+					ary1.append(ary[i])
+				else:
+					ary2.append(ary[i])
+			ary1 = self._mergeSortHelp(ary1)
+			ary2 = self._mergeSortHelp(ary2)
+			return self._merge(ary1, ary2)
+
+	def _merge(self, ary1, ary2):
+		l = 0
+		r = 0
+		i = 0
+		merged = []
+		while l < len(ary1) and r < len(ary2):
+			if ary1[l] <= ary2[r]:
+				merged.append(ary1[l])
+				l += 1
+				i += 1
+			elif ary2[r] <= ary1[l]:
+				merged.append(ary2[r])
+				r += 1
+				i += 1
+		while l < len(ary1):
+			merged.append(ary1[l])
+			i += 1
+			l += 1
+		while r < len(ary2):
+			merged.append(ary2[r])
+			i += 1
+			r += 1
+		return merged
+
+	def radixSort(self):
+		raise NotImplementedError("This operation is currently unsupported")
+
 	def toString(self):
 		s = "["
 		for i in range(len(self._ary)):
@@ -139,6 +194,11 @@ def main():
 			s.quickSort()
 			print(s.toString())
 			return
+		elif sys.argv[1] == "MergeSort":
+			print("Python Merge Sort")
+			print(s.toString())
+			s.mergeSort()
+			print(s.toString())
 		else:
 			raise IndexError()
 	except IndexError:
